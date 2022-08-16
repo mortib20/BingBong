@@ -1,0 +1,20 @@
+set(SDL2_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/include")
+
+# Support both 32 and 64 bit builds
+if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+  set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/x64/SDL2.lib;${CMAKE_CURRENT_LIST_DIR}/lib/x64/SDL2main.lib")
+
+  if(WIN32)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/Debug/)
+    configure_file("${CMAKE_CURRENT_LIST_DIR}/lib/x64/SDL2.dll" "${CMAKE_CURRENT_BINARY_DIR}/Debug" COPYONLY)
+  endif()
+else ()
+  set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/x86/SDL2.lib;${CMAKE_CURRENT_LIST_DIR}/lib/x86/SDL2main.lib")
+
+  if(WIN32)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/Debug/)
+    configure_file("${CMAKE_CURRENT_LIST_DIR}/lib/x86/SDL2.dll" "${CMAKE_CURRENT_BINARY_DIR}/Debug" COPYONLY)
+  endif()
+endif ()
+
+string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
