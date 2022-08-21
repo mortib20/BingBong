@@ -1,5 +1,9 @@
 #pragma once
+#ifdef linux
+#include <SDL2/SDL.h>
+#else
 #include <SDL.h>
+#endif
 /**
 * TODO
 * - Linux
@@ -110,7 +114,7 @@ public:
 	BingBong()
 	{
 		// Create the window and the renderer
-		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, NULL);
+		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 		// Set player count and rectangle size 
